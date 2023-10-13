@@ -22,12 +22,19 @@ jobs:
         with:
           username: ${{ github.triggering_actor }}
       - run: |
-          echo user_slack_id: ${{ steps.slack-users.outputs.user_slack_id }}
-          echo florian_slack_id: ${{ steps.slack-users.outputs.florian_slack_id }}
-          echo stephane_slack_id: ${{ steps.slack-users.outputs.stephane_slack_id }}
-          echo axel_slack_id: ${{ steps.slack-users.outputs.axel_slack_id }}
-          echo pierre_slack_id: ${{ steps.slack-users.outputs.pierre_slack_id }}
-          echo mathieu_slack_id: ${{ steps.slack-users.outputs.mathieu_slack_id }}
+          echo has_user: ${{ steps.slack-users.outputs.has_user }}
+          echo user_slack_id: "${{ steps.slack-users.outputs.user_slack_id }}"
+          echo florian_slack_id: "${{ steps.slack-users.outputs.florian_slack_id }}"
+          echo stephane_slack_id: "${{ steps.slack-users.outputs.stephane_slack_id }}"
+          echo axel_slack_id: "${{ steps.slack-users.outputs.axel_slack_id }}"
+          echo pierre_slack_id: "${{ steps.slack-users.outputs.pierre_slack_id }}"
+          echo mathieu_slack_id: "${{ steps.slack-users.outputs.mathieu_slack_id }}"
+          echo user_mention: "${{ steps.slack-users.outputs.user_mention }}"
+          echo florian_mention: "${{ steps.slack-users.outputs.florian_mention }}"
+          echo stephane_mention: "${{ steps.slack-users.outputs.stephane_mention }}"
+          echo axel_mention: "${{ steps.slack-users.outputs.axel_mention }}"
+          echo pierre_mention: "${{ steps.slack-users.outputs.pierre_mention }}"
+          echo mathieu_mention: "${{ steps.slack-users.outputs.mathieu_mention }}"
 ```
 ## DEV
 

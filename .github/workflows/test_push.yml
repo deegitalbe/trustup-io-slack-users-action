@@ -16,6 +16,7 @@ jobs:
         with:
           username: ${{ github.triggering_actor }}
       - run: |
+          echo has_user: ${{ steps.slack-users.outputs.has_user }}
           echo user_slack_id: "${{ steps.slack-users.outputs.user_slack_id }}"
           echo florian_slack_id: "${{ steps.slack-users.outputs.florian_slack_id }}"
           echo stephane_slack_id: "${{ steps.slack-users.outputs.stephane_slack_id }}"
