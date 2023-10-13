@@ -1,4 +1,4 @@
-name: "TrustUpIo slack users"
+name: "TrustUp Io slack users"
 description: "Defines current user slack id and outputs developers slack id"
 author: "Mathieu Henrotay"
 inputs:
