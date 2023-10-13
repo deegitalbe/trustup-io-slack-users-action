@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: deegitalbe/trustup-io-slack-users@v1
+      - uses: deegitalbe/trustup-io-slack-users-action@v1
         id: slack-users
         with:
           username: ${{ github.triggering_actor }}
