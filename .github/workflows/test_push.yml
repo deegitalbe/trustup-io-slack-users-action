@@ -1,0 +1,24 @@
+name: 'test-push'
+on: # rebuild any PRs and main branch changes
+  push:
+    branches:
+      - main
+      - release/**
+      - dev/**
+
+jobs:
+  test: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        id: variables-output
+        with:
+          username: ${{ github.triggering_actor }}
+      - run: |
+          echo user_slack_id: ${{ steps.variables-output.outputs.user_slack_id }}
+          echo florian_slack_id: ${{ steps.variables-output.outputs.florian_slack_id }}
+          echo stephane_slack_id: ${{ steps.variables-output.outputs.stephane_slack_id }}
+          echo axel_slack_id: ${{ steps.variables-output.outputs.axel_slack_id }}
+          echo pierre_slack_id: ${{ steps.variables-output.outputs.pierre_slack_id }}
+          echo mathieu_slack_id: ${{ steps.variables-output.outputs.mathieu_slack_id }}

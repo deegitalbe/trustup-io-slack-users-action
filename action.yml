@@ -1,0 +1,26 @@
+name: "TrustupIo slack users"
+description: "Defines current user slack id and outputs developers slack id"
+author: "Mathieu Henrotay"
+inputs:
+  username:
+    required: true
+    description: "Username to search for"
+outputs:
+  user_slack_id:
+    description: "Searched user slack id"
+  florian_slack_id:
+    description: "Florian slack id"
+  stephane_slack_id:
+    description: "Stéphane slack id"
+  axel_slack_id:
+    description: "Axel slack id"
+  pierre_slack_id:
+    description: "Pierre slack id"
+  mathieu_slack_id:
+    description: "Mathieu slack id"
+runs:
+  using: "node16"
+  main: "dist/index.js"
+branding:
+  icon: 'settings'
+  color: 'white'

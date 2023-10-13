@@ -1,0 +1,38 @@
+import {Enum} from '../types'
+
+export const DEVELOPER = {
+  FLORIAN: 'FLORIAN',
+  AXEL: 'AXEL',
+  PIERRE: 'PIERRE',
+  STEPHANE: 'STEPHANE',
+  MATHIEU: 'MATHIEU'
+} as const
+
+export const SLACK_USER = {
+  [DEVELOPER.FLORIAN]: 'U1WBECQ21',
+  [DEVELOPER.STEPHANE]: 'U02H76N186L',
+  [DEVELOPER.AXEL]: 'U04AS2VLJH0',
+  [DEVELOPER.PIERRE]: 'U04A66SHPNJ',
+  [DEVELOPER.MATHIEU]: 'UMZS1QV1C'
+} as const
+
+export const GITHUB_USER = {
+  [DEVELOPER.FLORIAN]: 'fhusquinet',
+  [DEVELOPER.STEPHANE]: 'stephaneleonard',
+  [DEVELOPER.AXEL]: 'AM-devv',
+  [DEVELOPER.PIERRE]: 'Pwatup',
+  [DEVELOPER.MATHIEU]: 'henrotaym'
+} as const
+
+export const USER_MAPPING = {
+  [GITHUB_USER[DEVELOPER.FLORIAN]]: SLACK_USER[DEVELOPER.FLORIAN],
+  [GITHUB_USER[DEVELOPER.STEPHANE]]: SLACK_USER[DEVELOPER.STEPHANE],
+  [GITHUB_USER[DEVELOPER.AXEL]]: SLACK_USER[DEVELOPER.AXEL],
+  [GITHUB_USER[DEVELOPER.PIERRE]]: SLACK_USER[DEVELOPER.PIERRE],
+  [GITHUB_USER[DEVELOPER.MATHIEU]]: SLACK_USER[DEVELOPER.MATHIEU]
+} as const
+
+export type Developer = Enum<typeof DEVELOPER>
+export type SlackUser = Enum<typeof SLACK_USER>
+export type GithubUser = Enum<typeof GITHUB_USER>
+export type UserMapping = typeof USER_MAPPING
