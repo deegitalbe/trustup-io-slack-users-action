@@ -17,13 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: henrotaym/prepare-terraform-variables-action@v2
-        id: terraform-output
+      - uses: deegitalbe/trustup-io-slack-users@v1
+        id: slack-users
         with:
-          app_key: "${{ github.event.repository.name }}"
-          github_branch: "${{ github.ref }}"
+          username: ${{ github.triggering_actor }}
       - run: |
-          echo trustup_app_key: ${{ steps.terraform-output.outputs.trustup_app_key }}
+          echo user_slack_id: ${{ steps.slack-users.outputs.user_slack_id }}
+          echo florian_slack_id: ${{ steps.slack-users.outputs.florian_slack_id }}
+          echo stephane_slack_id: ${{ steps.slack-users.outputs.stephane_slack_id }}
+          echo axel_slack_id: ${{ steps.slack-users.outputs.axel_slack_id }}
+          echo pierre_slack_id: ${{ steps.slack-users.outputs.pierre_slack_id }}
+          echo mathieu_slack_id: ${{ steps.slack-users.outputs.mathieu_slack_id }}
 ```
 ## DEV
 
