@@ -6,6 +6,8 @@ inputs:
     required: true
     description: "Username to search for"
 outputs:
+  has_user:
+    description: "Telling if slack user was found"
   user_slack_id:
     description: "Searched user slack id"
   florian_slack_id:
@@ -18,6 +20,18 @@ outputs:
     description: "Pierre slack id"
   mathieu_slack_id:
     description: "Mathieu slack id"
+  user_mention:
+    description: "Mention user"
+  florian_mention:
+    description: "Mention Florian"
+  stephane_mention:
+    description: "Mention Stéphane"
+  axel_mention:
+    description: "Mention Axel"
+  pierre_mention:
+    description: "Mention Pierre"
+  mathieu_mention:
+    description: "Mention Mathieu"
 runs:
   using: "node16"
   main: "dist/index.js"

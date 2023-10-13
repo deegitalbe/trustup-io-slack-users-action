@@ -1,39 +1,6 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 119:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.APP_GROUP = void 0;
-exports.APP_GROUP = {
-    TRUSTUP_IO: 'trustup-io',
-    WORKSITE: 'worksite',
-    TRUSTUP_BE: 'trustup-be'
-};
-
-
-/***/ }),
-
-/***/ 323:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ENVIRONMENT = void 0;
-exports.ENVIRONMENT = {
-    PRODUCTION: 'production',
-    DEV: 'dev',
-    STAGING: 'staging',
-    LOCAL: 'local'
-};
-
-
-/***/ }),
-
 /***/ 489:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -54,8 +21,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(119), exports);
-__exportStar(__nccwpck_require__(323), exports);
 __exportStar(__nccwpck_require__(540), exports);
 __exportStar(__nccwpck_require__(200), exports);
 __exportStar(__nccwpck_require__(858), exports);
@@ -85,12 +50,19 @@ exports.INPUT = {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OUTPUT = void 0;
 exports.OUTPUT = {
+    HAS_USER: 'has_user',
     USER_SLACK_ID: 'user_slack_id',
+    USER_MENTION: 'user_mention',
     FLORIAN_SLACK_ID: 'florian_slack_id',
+    FLORIAN_MENTION: 'florian_mention',
     STEPHANE_SLACK_ID: 'stephane_slack_id',
+    STEPHANE_MENTION: 'stephane_mention',
     AXEL_SLACK_ID: 'axel_slack_id',
+    AXEL_MENTION: 'axel_mention',
     PIERRE_SLACK_ID: 'pierre_slack_id',
-    MATHIEU_SLACK_ID: 'mathieu_slack_id'
+    PIERRE_MENTION: 'pierre_mention',
+    MATHIEU_SLACK_ID: 'mathieu_slack_id',
+    MATHIEU_MENTION: 'mathieu_mention'
 };
 
 
@@ -156,14 +128,13 @@ const utils_1 = __nccwpck_require__(606);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            (0, core_1.setOutput)(enums_1.OUTPUT.FLORIAN_SLACK_ID, enums_1.SLACK_USER[enums_1.DEVELOPER.FLORIAN]);
-            (0, core_1.setOutput)(enums_1.OUTPUT.STEPHANE_SLACK_ID, enums_1.SLACK_USER[enums_1.DEVELOPER.STEPHANE]);
-            (0, core_1.setOutput)(enums_1.OUTPUT.AXEL_SLACK_ID, enums_1.SLACK_USER[enums_1.DEVELOPER.AXEL]);
-            (0, core_1.setOutput)(enums_1.OUTPUT.PIERRE_SLACK_ID, enums_1.SLACK_USER[enums_1.DEVELOPER.PIERRE]);
-            (0, core_1.setOutput)(enums_1.OUTPUT.MATHIEU_SLACK_ID, enums_1.SLACK_USER[enums_1.DEVELOPER.MATHIEU]);
             const githubUser = (0, utils_1.getGithubUser)();
-            const slackUser = githubUser ? (0, utils_1.getSlackUser)(githubUser) : undefined;
-            (0, core_1.setOutput)(enums_1.OUTPUT.USER_SLACK_ID, slackUser);
+            const hasGithubUser = !!githubUser;
+            (0, core_1.setOutput)(enums_1.OUTPUT.HAS_USER, hasGithubUser);
+            (0, utils_1.outputUser)(githubUser);
+            for (const developer of Object.values(enums_1.DEVELOPER)) {
+                (0, utils_1.outputDeveloper)(developer);
+            }
         }
         catch (error) {
             if (error instanceof Error)
@@ -194,6 +165,20 @@ exports["default"] = getGithubUser;
 
 /***/ }),
 
+/***/ 817:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const getSlackMention = (username) => {
+    return `<@${username}>`;
+};
+exports["default"] = getSlackMention;
+
+
+/***/ }),
+
 /***/ 949:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -218,11 +203,77 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getSlackUser = exports.getGithubUser = void 0;
+exports.getGithubUser = exports.outputUser = exports.outputDeveloper = void 0;
+var output_developer_1 = __nccwpck_require__(393);
+Object.defineProperty(exports, "outputDeveloper", ({ enumerable: true, get: function () { return __importDefault(output_developer_1).default; } }));
+var output_user_1 = __nccwpck_require__(548);
+Object.defineProperty(exports, "outputUser", ({ enumerable: true, get: function () { return __importDefault(output_user_1).default; } }));
 var get_github_user_1 = __nccwpck_require__(718);
 Object.defineProperty(exports, "getGithubUser", ({ enumerable: true, get: function () { return __importDefault(get_github_user_1).default; } }));
-var get_slack_user_1 = __nccwpck_require__(949);
-Object.defineProperty(exports, "getSlackUser", ({ enumerable: true, get: function () { return __importDefault(get_slack_user_1).default; } }));
+
+
+/***/ }),
+
+/***/ 393:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const enums_1 = __nccwpck_require__(489);
+const output_slack_value_1 = __importDefault(__nccwpck_require__(16));
+const outputDeveloper = (developer) => {
+    const githubUser = enums_1.GITHUB_USER[developer];
+    (0, output_slack_value_1.default)(developer, githubUser);
+};
+exports["default"] = outputDeveloper;
+
+
+/***/ }),
+
+/***/ 16:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core_1 = __nccwpck_require__(186);
+const enums_1 = __nccwpck_require__(489);
+const get_slack_mention_1 = __importDefault(__nccwpck_require__(817));
+const get_slack_user_1 = __importDefault(__nccwpck_require__(949));
+const outputSlackValue = (outputKey, githubUser) => {
+    const slackIdOutputKey = enums_1.OUTPUT[`${outputKey}_SLACK_ID`];
+    const slackMentionOutputKey = enums_1.OUTPUT[`${outputKey}_MENTION`];
+    const slackUser = githubUser ? (0, get_slack_user_1.default)(githubUser) : undefined;
+    const slackMention = slackUser ? (0, get_slack_mention_1.default)(slackUser) : undefined;
+    (0, core_1.setOutput)(slackIdOutputKey, slackUser);
+    (0, core_1.setOutput)(slackMentionOutputKey, slackMention);
+};
+exports["default"] = outputSlackValue;
+
+
+/***/ }),
+
+/***/ 548:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const output_slack_value_1 = __importDefault(__nccwpck_require__(16));
+const outputUser = (githubUser) => {
+    (0, output_slack_value_1.default)('USER', githubUser);
+};
+exports["default"] = outputUser;
 
 
 /***/ }),
